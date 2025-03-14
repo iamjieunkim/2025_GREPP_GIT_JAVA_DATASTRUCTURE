@@ -57,7 +57,7 @@ public class Queue<E> implements Collection<E> {
         return elements.contains(e);
     }
 
-    public void traverse() {
+    public void print() {
         elements.traverse();
     }
 }
