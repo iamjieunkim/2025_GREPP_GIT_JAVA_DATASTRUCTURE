@@ -1,5 +1,8 @@
 package io.jieun.arratList;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 //list가 e값을 받았고 arraylist에 e값을 넘겨준다.
 public class ArrayList<E> implements List<E> {
 
@@ -10,11 +13,10 @@ public class ArrayList<E> implements List<E> {
 
         Object[] temp = new Object[elements.length + 1];
 
-        for(int i = 0; i < elements.length; i++) {
+        for ( int i = 0; i < elements.length; i++ ) {
             temp[i] = elements[i];
         }
 
-        //길이랑 index는 동일하지 않기 때문에
         temp[elements.length] = e;
         elements = temp;
 
@@ -22,48 +24,42 @@ public class ArrayList<E> implements List<E> {
 
     @Override
     public void add(int index, E e) {
-        //[1,2,3,4]
-        //[1,2,5,]
+
         Object[] temp = new Object[elements.length + 1];
 
-        for(int i=0, j=0; i< temp.length; i++){
-            if(i==index){
+        for ( int i = 0, j = 0; i < temp.length; i++ ) {
+            if ( i == index ) {
                 temp[i] = e;
-            }else{
+            } else {
                 temp[i] = elements[j++];
             }
         }
 
         elements = temp;
 
-
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public E get(int index) {
-        return (E)elements[index];
+        return (E) elements[index];
     }
 
     @Override
     public E set(int index, E e) {
-        //1.원래 있던 값을 반환하고자 함
-        Object origin = elements[index];
         elements[index] = e;
         return e;
     }
 
     @Override
     public E remove(int index) {
-        // elements의 길이를 유동적으로 바꾸겠다.
-        //[1,2,3,4,5]
-        //[1,2,4,5]이런식으로 중간의 값이 빠질떄 어떻게 할래?
-        //인덱스에서 하나를 지웠다는건 => 배열의 길이가 하나 짧아졌다는 것
+
         Object[] temp = new Object[elements.length - 1];
 
         E target = get(index);
-        for(int i=0, j=0; i< elements.length; i++){
-            if(i==index){
+
+        for ( int i = 0, j = 0; i < elements.length; i++) {
+            if ( i == index ) {
                 continue;
             }
             temp[j++] = elements[i];
@@ -77,8 +73,8 @@ public class ArrayList<E> implements List<E> {
     @Override
     public boolean contains(E e) {
 
-        for(int i=0; i<elements.length; i++){
-            if(elements[i].equals(e)){
+        for ( int i = 0; i < elements.length; i++ ) {
+            if ( elements[i].equals(e) ) {
                 return true;
             }
         }
@@ -89,17 +85,17 @@ public class ArrayList<E> implements List<E> {
     @Override
     public void remove(E e) {
 
-        if(!contains(e)){
+        if ( !contains(e) ) {
             return;
         }
 
         Object[] temp = new Object[elements.length - 1];
-        //하나만 삭제하기 위해서 깃발을 하나 만들었다.
+
         boolean flag = false;
 
-        for(int i=0, j=0; i< elements.length; i++){
+        for ( int i = 0, j = 0; i < elements.length; i++ ) {
 
-            if( !flag && elements[i].equals(e)){
+            if ( !flag && elements[i].equals(e) ) {
                 flag = true;
                 continue;
             }
@@ -107,6 +103,7 @@ public class ArrayList<E> implements List<E> {
             temp[j++] = elements[i];
 
         }
+
         elements = temp;
 
     }
@@ -121,10 +118,52 @@ public class ArrayList<E> implements List<E> {
         return elements.length;
     }
 
-    public void print(){
-        for(int i=0; i<elements.length; i++){
-            System.out.print(elements[i]+" ");
+    public void print() {
+        for ( int i = 0; i < elements.length; i++ ) {
+            System.out.print(elements[i] + " ");
         }
         System.out.println();
     }
+
+    @Override
+    public Iterator<E> iterator() {
+        return new ListIterator();
+    }
+
+    private class ListIterator implements Iterator<E> {
+
+        // current index
+        private int curIdx = 0;
+
+        /**
+         * Returns {@code true} if the iteration has more elements.
+         * (In other words, returns {@code true} if {@link #next} would
+         * return an element rather than throwing an exception.)
+         *
+         * @return {@code true} if the iteration has more elements
+         */
+        @Override
+        public boolean hasNext() {
+            return curIdx < elements.length;
+        }
+
+        /**
+         * Returns the next element in the iteration.
+         *
+         * @return the next element in the iteration
+         * @throws NoSuchElementException if the iteration has no more elements
+         */
+        @Override
+        @SuppressWarnings("all")
+        public E next() {
+
+            if ( !hasNext() ) {
+                throw new NoSuchElementException();
+            }
+
+            return (E) elements[curIdx++];
+        }
+
+    }
+
 }

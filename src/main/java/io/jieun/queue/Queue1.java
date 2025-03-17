@@ -3,13 +3,11 @@ package io.jieun.queue;
 import io.jieun.Collection;
 import io.jieun.linkedList.LinkedList;
 
-import java.util.Iterator;
-
-public class Queue<E> implements Collection<E> {
+public class Queue1<E> implements Collection<E> {
 
     private final LinkedList<E> elements;
 
-    public Queue() {
+    public Queue1() {
         this.elements = new LinkedList<>();
     }
 
@@ -18,19 +16,19 @@ public class Queue<E> implements Collection<E> {
     }
 
     public E poll() {
-        if ( isEmpty() ) {
+        if(isEmpty()) {
             return null;
         }
         return elements.removeFirst();
     }
 
     public E peek() {
-        if ( isEmpty() ) {
+        if(isEmpty()) {
             return null;
         }
+
         return elements.get(0);
     }
-
 
     @Override
     public void add(E e) {
@@ -39,7 +37,7 @@ public class Queue<E> implements Collection<E> {
 
     @Override
     public void remove(E e) {
-        if ( peek().equals(e) ) {
+        if(peek().equals(e)) {
             poll();
         }
     }
@@ -61,16 +59,6 @@ public class Queue<E> implements Collection<E> {
 
     public void print() {
         elements.traverse();
-    }
-
-    /**
-     * Returns an iterator over elements of type {@code T}.
-     *
-     * @return an Iterator.
-     */
-    @Override
-    public Iterator<E> iterator() {
-        return elements.iterator();
     }
 
 }

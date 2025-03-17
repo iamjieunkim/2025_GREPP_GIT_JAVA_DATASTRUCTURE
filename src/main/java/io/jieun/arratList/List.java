@@ -18,5 +18,5 @@ public interface List<E> extends Collection<E> {
      //CRUD
     //수정- 몇번째(index)요소에 있는 것을 e값으로 바꾸겠다.
     E set(int index, E e);
-    
+
 }

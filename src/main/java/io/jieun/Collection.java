@@ -1,6 +1,6 @@
 package io.jieun;
 //요소에 타입을 제네릭으로 받아줘야되기 때문에
-public interface Collection<E>  {
+public interface Collection<E> extends Iterable<E> {
     //넣어준다.
     void add(E e);
     //삭제한다.

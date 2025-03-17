@@ -3,6 +3,8 @@ package io.jieun.deque;
 import io.jieun.Collection;
 import io.jieun.linkedList.LinkedList;
 
+import java.util.Iterator;
+
 public class Deque<E> implements Collection<E> {
 
     private final LinkedList<E> elements;
@@ -11,24 +13,41 @@ public class Deque<E> implements Collection<E> {
         this.elements = new LinkedList<>();
     }
 
-    public void offer(E e){
+    public void offer(E e) {
         elements.addFirst(e);
     }
 
-    public void push(E e){
+    public void push(E e) {
         elements.addLast(e);
     }
 
-    public E pop(){
-        return isEmpty() ? null : elements.removeLast();
+    public E pop() {
+//        return isEmpty() ? null : elements.removeLast();
+        if ( isEmpty() ) {
+            return null;
+        }
+        return elements.removeLast();
     }
 
     public E poll() {
-        return isEmpty() ? null : elements.removeFirst();
+        if ( isEmpty() ) {
+            return null;
+        }
+        return elements.removeFirst();
     }
 
     public E peek() {
-        return isEmpty()? null : elements.get(elements.size() - 1);
+        if ( isEmpty() ) {
+            return null;
+        }
+        return elements.get(0);
+    }
+
+    public E peekLast() {
+        if ( isEmpty() ) {
+            return null;
+        }
+        return elements.get(elements.size() - 1);
     }
 
 
@@ -39,7 +58,7 @@ public class Deque<E> implements Collection<E> {
 
     @Override
     public void remove(E e) {
-        if(peek().equals(e)){
+        if ( peek().equals(e) ) {
             poll();
         }
     }
@@ -59,7 +78,17 @@ public class Deque<E> implements Collection<E> {
         return elements.contains(e);
     }
 
-    public void print(){
+    public void print() {
         this.elements.traverse();
+    }
+
+    /**
+     * Returns an iterator over elements of type {@code T}.
+     *
+     * @return an Iterator.
+     */
+    @Override
+    public Iterator<E> iterator() {
+        return elements.iterator();
     }
 }
