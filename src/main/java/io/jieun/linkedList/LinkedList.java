@@ -2,6 +2,8 @@ package io.jieun.linkedList;
 
 import io.jieun.arratList.List;
 
+import java.util.Iterator;
+
 public class LinkedList<E> implements List<E> {
 
     //LinkedList는 일반 배열이랑 조금 다르다, 노드가 안에 들어있기 때문에
@@ -285,6 +287,10 @@ public class LinkedList<E> implements List<E> {
         }
 
     }
+
+
+
+
 
 
 }
