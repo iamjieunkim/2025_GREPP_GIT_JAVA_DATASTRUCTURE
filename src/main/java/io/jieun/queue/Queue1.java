@@ -3,6 +3,8 @@ package io.jieun.queue;
 import io.jieun.Collection;
 import io.jieun.linkedList.LinkedList;
 
+import java.util.Iterator;
+
 public class Queue1<E> implements Collection<E> {
 
     private final LinkedList<E> elements;
@@ -61,4 +63,8 @@ public class Queue1<E> implements Collection<E> {
         elements.traverse();
     }
 
+    @Override
+    public Iterator<E> iterator() {
+        return null;
+    }
 }
