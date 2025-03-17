@@ -1,4 +1,7 @@
 package io.jieun;
+
+import io.jieun.stream.Stream;
+
 //요소에 타입을 제네릭으로 받아줘야되기 때문에
 public interface Collection<E> extends Iterable<E> {
     //넣어준다.
@@ -13,5 +16,5 @@ public interface Collection<E> extends Iterable<E> {
     //이 원소가 이 자료구조 안에 포함되어 있나요?
     boolean contains(E e);
 
-
+    Stream<E> stream();
 }
